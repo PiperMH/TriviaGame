@@ -38,8 +38,7 @@ var trivia = {
 	countdown: function(){
 		trivia.counter--;
 		$("#counter").html(trivia.counter);
-		if(game.counter <= 0){
-			console.log("time is up!");
+		if(trivia.counter <= 0){
 			trivia.done();
 		}
 	},
@@ -47,7 +46,7 @@ var trivia = {
 
 	start: function(){
 	timer = setInterval(trivia.countdown,1000);
-	$('#subWrapper').prepend('<h3> Time Remaining: <span id="counter">90</span> Seconds</3>');
+	$('#subWrapper').prepend('<h3> Time Remaining: <span id="counter">10</span> Seconds</3>');
 	$('#start').remove();
 		for(var i = 0; i < questions.length; i++){
 		$('#subWrapper').append("<h3>" + questions[i].question + "</h3>");
@@ -58,37 +57,38 @@ var trivia = {
 			}
 
 		},
+
 	done: function(){
 		$.each($("input[name = 'question-0']: checked"), function(){
-			if($(this).val() == question[0].correctAnswer){
+			if($(this).val() == questions[0].correctAnswer){
 				trivia.correct++;
 			} else {
 				trivia.incorrect++;
 			}
 		});
 		$.each($("input[name = 'question-1']: checked"), function(){
-			if($(this).val() == question[1].correctAnswer){
+			if($(this).val() == questions[1].correctAnswer){
 				trivia.correct++;
 			} else {
 				trivia.incorrect++;
 			}
 		});
 		$.each($("input[name = 'question-2']: checked"), function(){
-			if($(this).val() == question[2].correctAnswer){
+			if($(this).val() == questions[2].correctAnswer){
 				trivia.correct++;
 			} else {
 				trivia.incorrect++;
 			}
 		});
 		$.each($("input[name = 'question-3']: checked"), function(){
-			if($(this).val() == question[3].correctAnswer){
+			if($(this).val() == questions[3].correctAnswer){
 				trivia.correct++;
 			} else {
 				trivia.incorrect++;
 			}
 		});
 		$.each($("input[name = 'question-4']: checked"), function(){
-			if($(this).val() == question[4].correctAnswer){
+			if($(this).val() == questions[4].correctAnswer){
 				trivia.correct++;
 			} else {
 				trivia.incorrect++;
@@ -102,7 +102,7 @@ var trivia = {
 			clearInterval(timer);
 			$("#subWrapper h3").remove();
 
-			$("#subWrapper").html("<h3>ALL DONE!</h3>");
+			$("#subWrapper").html("<h2>ALL DONE!</h2>");
 			$("#subWrapper").append("<h3>Correct Answer: " + this.correct + "</h3>");
 			$("#subWrapper").append("<h3>Correct Answer: " + this.incorect + "</h3>");
 			$("#subWrapper").append("<h3>Unanswered: " + (questions.length - (this.incorect+this.correct)) + "</h3>");
