@@ -39,19 +39,21 @@ var trivia = {
 		trivia.counter--;
 		$("#counter").html(trivia.counter);
 		if(trivia.counter <= 0){
-			trivia.done();
+			console.log("time is up");
+			//trivia.done();
 		}
 	},
 
 
 	start: function(){
 	timer = setInterval(trivia.countdown,1000);
-	$('#subWrapper').prepend('<h3> Time Remaining: <span id="counter">10</span> Seconds</3>');
+	$('#wrapper1').prepend('<h3> Time Remaining: <span id="counter">10</span> Seconds</3>');
 	$('#start').remove();
+		
 		for(var i = 0; i < questions.length; i++){
-		$('#subWrapper').append("<h3>" + questions[i].question + "</h3>");
+		$('#wrapper1').append("<h3>" + questions[i].question + "</h3>");
 			for(var h = 0; h < questions[i].answers.length; h++){
-				$("#subWrapper").append("<input type = 'radio' name ='question-'" + i + 
+				$("#wrapper1").append("<input type = 'radio' name ='question-" + i +
 				"'value = '" + questions[i].answers[h] + "'>" + questions[i].answers[h]);
 				}
 			}
@@ -94,18 +96,19 @@ var trivia = {
 				trivia.incorrect++;
 			}
 		});
+		
 
 		this.results();
 		},
 
 		reults: function(){
 			clearInterval(timer);
-			$("#subWrapper h3").remove();
+			$("#wrapper1 h3").remove();
 
-			$("#subWrapper").html("<h2>ALL DONE!</h2>");
-			$("#subWrapper").append("<h3>Correct Answer: " + this.correct + "</h3>");
-			$("#subWrapper").append("<h3>Correct Answer: " + this.incorect + "</h3>");
-			$("#subWrapper").append("<h3>Unanswered: " + (questions.length - (this.incorect+this.correct)) + "</h3>");
+			$("#wrapper1").html("<h2>ALL DONE!</h2>");
+			$("#wrapper1").append("<h3>Correct Answer: " + this.correct + "</h3>");
+			$("#wrapper1").append("<h3>Correct Answer: " + this.incorect + "</h3>");
+			$("#wrapper1").append("<h3>Unanswered: " + (questions.length - (this.incorect+this.correct)) + "</h3>");
 
 
 		}
