@@ -4,10 +4,11 @@ $('#start').on('click',function(){
 	trivia.start();
 	//("#start").remove();
 	//$("#card1").append("weee");
+})
 
-
-});
-
+$(document).on('click','#end',function(){
+	trivia.done();
+})
 
 var questions = [{
 	question: "Which of the follower was not one of the original sports in the modern Olympic Games?",
@@ -57,7 +58,7 @@ var trivia = {
 				"'value = '" + questions[i].answers[h] + "'>" + questions[i].answers[h]);
 				}
 			}
-
+			$('#wrapper1').append('<br><button id ="end">DONE</button>')
 		},
 
 	done: function(){
