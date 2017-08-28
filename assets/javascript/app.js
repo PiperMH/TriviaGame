@@ -12,7 +12,7 @@ $('#start').on('click',function(){
 var questions = [{
 	question: "Which of the follower was not one of the original sports in the modern Olympic Games?",
 	answers:["rowing ","pentathlon ","badmitten"],
-	correctAnswer:"badmitten"
+	correctAnswer:"badminton"
 }, {
 	question: "What do the five Olympic rings represent?",
 	answers:["The five major regions of the world ","The five original athletes ","The five languages spoken during the game "],
@@ -40,7 +40,7 @@ var trivia = {
 		$("#counter").html(trivia.counter);
 		if(trivia.counter <= 0){
 			console.log("time is up");
-			//trivia.done();
+			trivia.done();
 		}
 	},
 
@@ -61,35 +61,37 @@ var trivia = {
 		},
 
 	done: function(){
-		$.each($("input[name = 'question-0']: checked"), function(){
+		clearInterval(timer);
+
+		$.each($("input[name = 'question-0']:checked"), function(){
 			if($(this).val() == questions[0].correctAnswer){
 				trivia.correct++;
 			} else {
 				trivia.incorrect++;
 			}
 		});
-		$.each($("input[name = 'question-1']: checked"), function(){
+		$.each($("input[name = 'question-1']:checked"), function(){
 			if($(this).val() == questions[1].correctAnswer){
 				trivia.correct++;
 			} else {
 				trivia.incorrect++;
 			}
 		});
-		$.each($("input[name = 'question-2']: checked"), function(){
+		$.each($("input[name = 'question-2']:checked"), function(){
 			if($(this).val() == questions[2].correctAnswer){
 				trivia.correct++;
 			} else {
 				trivia.incorrect++;
 			}
 		});
-		$.each($("input[name = 'question-3']: checked"), function(){
+		$.each($("input[name = 'question-3']:checked"), function(){
 			if($(this).val() == questions[3].correctAnswer){
 				trivia.correct++;
 			} else {
 				trivia.incorrect++;
 			}
 		});
-		$.each($("input[name = 'question-4']: checked"), function(){
+		$.each($("input[name = 'question-4']:checked"), function(){
 			if($(this).val() == questions[4].correctAnswer){
 				trivia.correct++;
 			} else {
@@ -101,14 +103,13 @@ var trivia = {
 		this.results();
 		},
 
-		reults: function(){
-			clearInterval(timer);
+		results: function(){
 			$("#wrapper1 h3").remove();
 
 			$("#wrapper1").html("<h2>ALL DONE!</h2>");
 			$("#wrapper1").append("<h3>Correct Answer: " + this.correct + "</h3>");
-			$("#wrapper1").append("<h3>Correct Answer: " + this.incorect + "</h3>");
-			$("#wrapper1").append("<h3>Unanswered: " + (questions.length - (this.incorect+this.correct)) + "</h3>");
+			$("#wrapper1").append("<h3>Correct Answer: " + this.incorrect + "</h3>");
+			$("#wrapper1").append("<h3>Unanswered: " + (questions.length - (this.incorrect+this.correct)) + "</h3>");
 
 
 		}
